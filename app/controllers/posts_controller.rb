@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
  
   def create
-    @post = Post.new(params[:post].permit(:title, :text))
+    @post = Post.new(params[:post].permit(:title, :text, :category_id))
  
     if @post.save
       redirect_to @post
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
  
-    if @post.update(params[:post].permit(:title, :text))
+    if @post.update(params[:post].permit(:title, :text, :category_id))
       redirect_to @post
     else
       render 'edit'
