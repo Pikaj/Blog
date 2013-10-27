@@ -20,7 +20,7 @@ Blog::Application.routes.draw do
     get '/' => "admin#index"
   end
 
-  root 'welcome#index'
+  root 'posts#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,21 +1,22 @@
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @post.text %>
-</p>
+<article class="row">
 
-<p>
-  <strong>Category</strong>
-  <% if @post.category %>
-    <%= @post.category.category %>
-    <% else %>
-    NO CATEGORY
-    <% end %>
-</p>
+    <div class="column_9 margin-bottom">
+        <h2><%= link_to @post.title, post_path(@post), :class=> "text bold color theme" %></h2>
+        <h5>
+            <% if @post.category %>
+            Category: 
+            <%= @post.category.category %>
+            <% end %> 
+            Written by <a href="#" class="text bold color theme">Pikaj</a> 
+            <%= time_ago_in_words(@post.created_at) %> 
+            ago
+        </h5>
+    </div>
+    <p class="column_9">
+        <%= @post.text %>
+    </p>
+</article>
+<hr/>
  
 <h2>Comments</h2>
 <%= render @post.comments %>

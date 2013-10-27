@@ -1,27 +1,94 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-  <title>Blog</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+    <title>My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+        <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+        <%= csrf_meta_tags %>
+    <style>
+        body > header .logo {
+            margin-top: 8px;
+            margin-right: 8px;
+            max-height: 30px; }
+
+        body > footer img {
+            height: 18px;
+            position: relative;
+            top: 5px;
+            left: 2px; }
+
+        div.img.avatar {
+            height: 46px;
+            width: 46px;
+            float: left;
+            margin: 1%; }
+    </style>
 </head>
-<body>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
 
-       <p class="navbar-text pull-right">
-<% if user_signed_in? %>
-  <%= link_to "Admin panel", admin_path %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
+<body class="text thin">
+<p class="navbar-text pull-right">
 
-<%= yield %>
+    <header class="bck light padding">
+        <div class="row">
+            <div class="column_6">
+                <h2 class="text italic thin"><%= link_to 'My Blog', root_path %></h2>
+            </div>
+            <nav class="column_6  text right bold">
+                <% if user_signed_in? %>
+                    <strong><%= current_user.email %></strong>
+                    <%= link_to "Admin panel", admin_path, :class => 'button tiny' %> 
+                    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'button tiny' %> 
+                    <a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow" class="button tiny secondary alert" class = 'button small alert' > <span class="icon off"></span>Logout </a>
+                <% else %>
+                    <a href="<%= new_user_session_path %>" class="button secondary"  ><span class='icon user'></span> Login</a>
+                    <a href="<%= new_user_registration_path %>" class="button" ><span class="icon pencil"></span>Sign up</a>
+                <% end %>
+            </nav>
+        </div>
+    </header>
 
+    <section class="padding">
+        <div class="row">
+            <%if notice %>
+                <div class="column_9 radius bck padding-top padding-bottom margin-bottom center text">
+                <%= notice %>
+                </div>
+            <% end %>
+        
+            <%if alert %>
+                <div class="column_9 alert radius bck padding-top padding-bottom margin-bottom center text">
+                <%= alert %>
+                </div>
+            <% end %>
+
+            <div class="column_9">
+                <%= yield %>
+            </div>
+
+            <aside class="column_3">
+                <h5 class="text normal">Categories</h5>
+                <nav class="margin-bottom">
+                    <% @categories.each do |category| %>
+                        <a href="#" class="display block color theme"><%= category.category %></a>
+                    <% end %>
+                </nav>
+            </aside>
+        </div>
+    </section>
+
+    <footer class="bck dark padding">
+        <div class="row margin-top margin-bottom">
+            <div class="column_5">
+                
+            </div>
+        </div>
+    </footer>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="../package/tuktuk.js"></script>
 </body>
+
 </html>
