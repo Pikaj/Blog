@@ -1,13 +1,23 @@
 Blog::Application.routes.draw do
-  get "welcome/index"
+  devise_for :users
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  resources :categories
 
+  resources :categories
+  
   resources :posts do
     resources :comments
+  end
+
+  namespace :admin do
+    resources :posts do
+      resources :comments
+    end
+    resources :categories
+    get '/' => "admin#index"
   end
 
   root 'welcome#index'

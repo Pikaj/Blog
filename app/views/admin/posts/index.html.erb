@@ -1,10 +1,6 @@
+
 <h1>Listing posts</h1>
 
-<br>
-<br>
-<%= link_to 'Categories', categories_path %>
-<br>
-<br>
 <table>
   <tr>
     <th>Title</th>
@@ -24,7 +20,13 @@
     NO CATEGORY
     <% end %>
     </td>
-    <td><%= link_to 'Show', post_path(post) %></td>
+    <td><%= link_to 'Show', admin_post_path(post) %></td>
+    <td><%= link_to 'Edit', edit_admin_post_path(post) %></td>
+    <td><%= link_to 'Destroy', admin_post_path(post),
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
+<br>
+<br>
+<%= link_to 'Add new post', new_admin_post_path %>

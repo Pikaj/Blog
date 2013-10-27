@@ -21,6 +21,7 @@
 <%= render @post.comments %>
  
 <h2>Add a comment:</h2>
-<%= render "comments/form" %>
+<%= render "admin/comments/form" %>
  
-<%= link_to 'Back to Posts', posts_path %>
+<%= link_to 'Edit Post', edit_admin_post_path(@post) %> |
+<%= link_to 'Back to Posts', admin_posts_path %>
