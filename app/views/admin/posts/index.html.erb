@@ -4,6 +4,7 @@
 <table>
   <tr>
     <th>Title</th>
+    <th>Author</th>
     <th>Text</th>
     <th>Category</th>
     <th></th>
@@ -14,6 +15,7 @@
 <% @posts.each do |post| %>
   <tr>
     <td><%= post.title %></td>
+    <td><%= post.user.email.split("@").first %></td>
     <td><%= post.text %></td>
     <td><% if post.category %>
     <%= post.category.category %>

@@ -1,5 +1,5 @@
 <%= form_for [:admin, @post] do |f| %>
-  <% if @post.errors.any? %>
+<% if @post.errors.any? %>
   <div id="errorExplanation">
     <h2><%= pluralize(@post.errors.count, "error") %> prohibited
       this post from being saved:</h2>

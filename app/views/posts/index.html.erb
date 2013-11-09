@@ -1,21 +1,21 @@
 <% @posts.each do |post| %>
 <article class="row">
 
-    <div class="column_9 margin-bottom">
-        <h2><%= link_to post.title, post_path(post), :class=> "text bold color theme" %></h2>
-        <h5>         
-            <% if post.category %>
-            Category: 
-            <%= post.category.category %>
-            <% end %> 
-            Written by <a href="#" class="text bold color theme">Pikaj</a> 
-            <%= time_ago_in_words(post.created_at) %> 
-            ago
-        </h5>
-    </div>
-    <p class="column_9">
-        <%= post.text %>
-    </p>
+  <div class="column_9 margin-bottom">
+    <h2><%= link_to post.title, post_path(post), :class=> "text bold color theme" %></h2>
+     <h5>         
+      <% if post.category %>
+      Category: 
+      <%= post.category.category %>
+      <% end %> 
+      Written by <a href="#" class="text bold color theme"><%= post.user.email.split("@").first %></a> 
+      <%= time_ago_in_words(post.created_at) %> 
+      ago
+    </h5>
+  </div>
+  <p class="column_9">
+    <%= post.text %>
+  </p>
 </article>
 <hr/>
 <% end %>

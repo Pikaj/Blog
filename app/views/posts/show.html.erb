@@ -1,26 +1,35 @@
 <article class="row">
 
-    <div class="column_9 margin-bottom">
-        <h2><%= link_to @post.title, post_path(@post), :class=> "text bold color theme" %></h2>
-        <h5>
-            <% if @post.category %>
-            Category: 
-            <%= @post.category.category %>
-            <% end %> 
-            Written by <a href="#" class="text bold color theme">Pikaj</a> 
-            <%= time_ago_in_words(@post.created_at) %> 
-            ago
-        </h5>
-    </div>
-    <p class="column_9">
-        <%= @post.text %>
-    </p>
+  <div class="column_9 margin-bottom">
+    <h2><%= link_to @post.title, post_path(@post), :class=> "text bold color theme" %></h2>
+    <h5>
+        <% if @post.category %>
+        Category: 
+        <%= @post.category.category %>
+        <% end %> 
+        Written by <a href="#" class="text bold color theme"><%= @post.user.email.split("@").first %></a> 
+        <%= time_ago_in_words(@post.created_at) %> 
+        ago
+    </h5>
+  </div>
+  <p class="column_9">
+    <%= @post.text %>
+  </p>
 </article>
 <hr/>
-
-
 <h2>Comments</h2>
-<%= render @post.comments %>
+<table>
+  <tr>
+    <th>Commenter</th>
+    <th>Text</th>
+  </tr>
+<% @post.comments.each do |comment| %>
+  <tr>
+    <td><%= comment.commenter %></td>
+    <td><%= comment.body %></td>
+  </tr>
+<% end %>
+</table>
  
 <h2>Add a comment:</h2>
 <%= render "comments/form" %>

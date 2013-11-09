@@ -7,7 +7,7 @@
             Category: 
             <%= @post.category.category %>
             <% end %> 
-            Written by <a href="#" class="text bold color theme">Pikaj</a> 
+            Written by <a href="#" class="text bold color theme"><%= @post.user.email.split("@").first %></a> 
             <%= time_ago_in_words(@post.created_at) %> 
             ago
         </h5>
@@ -19,7 +19,22 @@
 <hr/>
  
 <h2>Comments</h2>
-<%= render @post.comments %>
+<table>
+  <tr>
+    <th>Commenter</th>
+    <th>Text</th>
+    <th></th>
+  </tr>
+<% @post.comments.each do |comment| %>
+  <tr>
+    <td><%= comment.commenter %></td>
+    <td><%= comment.body %></td>
+    <td><%= link_to 'Destroy', [:admin, comment.post, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
  
 <h2>Add a comment:</h2>
 <%= render "admin/comments/form" %>

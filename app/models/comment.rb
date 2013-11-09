@@ -4,4 +4,5 @@ class Comment < ActiveRecord::Base
                     length: { minimum: 1 }
   	validates :body, presence: true,
                     length: { minimum: 1 }
+    attr_accessible :commenter, :body
 end

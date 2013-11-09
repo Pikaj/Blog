@@ -1,8 +1,6 @@
 class Post < ActiveRecord::Base
 	belongs_to :category
+	belongs_to :user, :foreign_key => :author_id
 	has_many :comments, dependent: :destroy
-	validates :text, presence: true,
-                    length: { minimum: 5 }
-	validates :title, presence: true,
-                    length: { minimum: 5 }
+    attr_accessible :title, :text, :category_id
 end

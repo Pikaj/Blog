@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
 
- 
   def create
     @post = Post.find(params[:post_id])
     @comment = Comment.new(params[:comment].permit(:commenter, :body))
@@ -10,6 +9,5 @@ class CommentsController < ApplicationController
     else
       render 'posts/show'
     end
-  end
- 
+  end 
 end
