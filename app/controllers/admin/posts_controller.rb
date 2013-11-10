@@ -25,6 +25,9 @@ class Admin::PostsController < AdminController
     rescue CreatePostService::NoCategoryError
       flash[:notice] = "Please select the category."
       render 'admin/posts/new'
+    rescue CreatePostService::PostError
+      flash[:notice] = "Failed to save post"
+      render 'admin/posts/new'
     end
   end
  
