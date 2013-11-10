@@ -12,17 +12,10 @@ class Admin::PostsController < AdminController
  
   def create
     author = current_user
-
-    @post = Post.new(params[:post].permit(:title,:text,:category_id))
-    @post.user = author
     begin
-      create_post_service.process(author, params[:post])
+      @post = create_post_service.process(author, params[:post])
       flash[:notice] = "Create new post success"
-      if @post.save
-        redirect_to admin_post_path(@post)
-      else
-        render 'new'
-      end
+      redirect_to admin_post_path(@post)
     rescue CreatePostService::EmptyTitleError
       flash[:notice] =  "Error: empty title"
       render 'admin/posts/new'
